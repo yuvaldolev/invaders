@@ -1,3 +1,7 @@
-fn main() {
-    println!("Hello, world!");
+use invaders::Invaders;
+
+fn main() -> anyhow::Result<()> {
+    let invaders = Invaders::new();
+
+    Ok(())
 }

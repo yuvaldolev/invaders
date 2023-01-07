@@ -1,11 +1,14 @@
 use std::result;
 
-use winit::error::OsError;
+use glfw::InitError;
 
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
-    #[error("failed creating a window: {0}")]
-    CreateWindow(#[source] OsError),
+    #[error("failed initializing GLFW: {0}")]
+    GlfwInitialize(#[source] InitError),
+
+    #[error("failed creating GLFW window")]
+    GlfwCreateWindow,
 }
 
 pub type Result<T> = result::Result<T, Error>;

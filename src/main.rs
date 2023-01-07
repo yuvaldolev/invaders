@@ -1,7 +1,8 @@
 use invaders::Invaders;
 
 fn main() -> anyhow::Result<()> {
-    let invaders = Invaders::new();
+    let mut invaders = Invaders::new()?;
+    invaders.run();
 
     Ok(())
 }

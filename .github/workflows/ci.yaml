@@ -17,9 +17,11 @@ jobs:
     # Install latest CMake and Ninja.
     - uses: lukka/get-cmake@latest
 
-    # Install RandR.
-    - name: Install XRandr.
-      run: sudo apt-get install -y libxrandr-dev
+    # Install the APT requirements.
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev
+        version: 1.0
 
     # Build the project.
     - name: Build

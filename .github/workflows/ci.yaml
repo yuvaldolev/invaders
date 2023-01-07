@@ -11,6 +11,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    # Checkout the repository.
     - uses: actions/checkout@v2
+
+    # Install latest CMake and Ninja.
+    - uses: lukka/get-cmake@latest
+
+    # Install RandR.
+    - name: Install XRandr.
+      run: sudo apt-get install -y libxrandr-dev
+
+    # Build the project.
     - name: Build
       run: cargo build --verbose

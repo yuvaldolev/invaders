@@ -11,8 +11,6 @@ pub struct Window {
     glfw_token: Glfw,
     glfw_window: glfw::Window,
     glfw_event_receiver: Receiver<(f64, WindowEvent)>,
-    // glfw_token: EventLoop<()>,
-    // glfw_window: window::Window,
 }
 
 impl Window {

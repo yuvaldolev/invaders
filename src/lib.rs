@@ -1,4 +1,5 @@
 mod error;
+mod event;
 mod invaders;
 mod window;
 

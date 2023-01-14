@@ -2,7 +2,6 @@ use crate::error;
 use crate::window::Window;
 
 pub struct Invaders {
-    // event_loop: EventLoop<()>,
     window: Window,
 }
 
@@ -16,9 +15,22 @@ impl Invaders {
     }
 
     pub fn run(&mut self) {
+        let mut frame_events = Vec::new();
+
         loop {
-            self.window.update();
+            // Update the window events.
+            self.window.update(&mut frame_events);
+
+            // Simulate the game.
+            for event in frame_events.iter() {
+                log::debug!("Event: {:?}", event);
+            }
+
+            // Swap the window buffers.
             self.window.swap_buffers();
+
+            // Clear the frame events.
+            frame_events.clear();
         }
     }
 }

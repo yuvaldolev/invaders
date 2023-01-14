@@ -3,6 +3,7 @@ use std::sync::mpsc::Receiver;
 use glfw::{Action, Context, Glfw, Key, WindowEvent, WindowMode};
 
 use crate::error;
+use crate::event::{Event, KeyboardEvent};
 
 pub struct Window {
     title: String,
@@ -11,8 +12,6 @@ pub struct Window {
     glfw_token: Glfw,
     glfw_window: glfw::Window,
     glfw_event_receiver: Receiver<(f64, WindowEvent)>,
-    // glfw_token: EventLoop<()>,
-    // glfw_window: window::Window,
 }
 
 impl Window {
@@ -44,21 +43,31 @@ impl Window {
         })
     }
 
-    pub fn update(&mut self) {
+    pub fn update(&mut self, frame_events: &mut Vec<Event>) {
         // Poll for and process events
         self.glfw_token.poll_events();
         for (_, event) in glfw::flush_messages(&self.glfw_event_receiver) {
-            println!("{:?}", event);
-            match event {
-                WindowEvent::Key(Key::Escape, _, Action::Press, _) => {
-                    self.glfw_window.set_should_close(true)
-                }
-                _ => {}
-            }
+            Self::process_event(&event, frame_events);
         }
     }
 
     pub fn swap_buffers(&mut self) {
         self.glfw_window.swap_buffers();
+    }
+
+    fn process_event(event: &WindowEvent, frame_events: &mut Vec<Event>) {
+        match event {
+            WindowEvent::Key(key, _, action, _) => {
+                Self::process_key_event(key, action, frame_events)
+            }
+            _ => (),
+        }
+    }
+
+    fn process_key_event(key: &Key, action: &Action, frame_events: &mut Vec<Event>) {
+        frame_events.push(Event::Keyboard(KeyboardEvent::new(
+            key.into(),
+            action.into(),
+        )));
     }
 }

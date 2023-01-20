@@ -18,6 +18,9 @@ impl Invaders {
         let mut frame_events = Vec::new();
 
         loop {
+            // Clear the frame events.
+            frame_events.clear();
+
             // Update the window events.
             self.window.update(&mut frame_events);
 
@@ -28,9 +31,6 @@ impl Invaders {
 
             // Swap the window buffers.
             self.window.swap_buffers();
-
-            // Clear the frame events.
-            frame_events.clear();
         }
     }
 }

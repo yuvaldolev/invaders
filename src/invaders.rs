@@ -1,8 +1,10 @@
 use crate::error;
+use crate::renderer::Renderer;
 use crate::window::Window;
 
 pub struct Invaders {
     window: Window,
+    renderer: Renderer,
 }
 
 impl Invaders {
@@ -10,8 +12,11 @@ impl Invaders {
         // Create the window.
         let window = Window::new(String::from("Invaders"), 1280, 720)?;
 
-        // Initialize the game.
-        Ok(Self { window })
+        // Create the renderer.
+        let renderer = Renderer::new(&window)?;
+
+        // Initialize Invaders.
+        Ok(Self { window, renderer })
     }
 
     pub fn run(&mut self) {

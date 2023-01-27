@@ -55,6 +55,18 @@ impl Window {
         self.glfw_window.swap_buffers();
     }
 
+    pub fn get_width(&self) -> u32 {
+        return self.width;
+    }
+
+    pub fn get_height(&self) -> u32 {
+        return self.height;
+    }
+
+    pub fn get_glfw_window(&self) -> &glfw::Window {
+        return &(self.glfw_window);
+    }
+
     fn process_event(event: &WindowEvent, frame_events: &mut Vec<Event>) {
         match event {
             WindowEvent::Key(key, _, action, _) => {

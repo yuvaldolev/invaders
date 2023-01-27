@@ -6,7 +6,7 @@ pub enum KeyboardKey {
     ArrowLeft,
     ArrowRight,
     ArrowUp,
-    ShiftLeft,
+    Space,
     Unknown,
 }
 
@@ -20,7 +20,7 @@ impl From<&Key> for KeyboardKey {
             Key::Left => KeyboardKey::ArrowLeft,
             Key::Right => KeyboardKey::ArrowRight,
             Key::Up => KeyboardKey::ArrowUp,
-            Key::LeftShift => KeyboardKey::ShiftLeft,
+            Key::Space => KeyboardKey::Space,
             _ => KeyboardKey::Unknown,
         }
     }
